@@ -120,10 +120,17 @@ router.post('/',
 
 router.get('/user/:user_id', async(req, res) =>{
     try {
-       const profiles = await Profile.find().populate('user', ['name', 'avatar']);
-       res.json(profiles);
+       const profile = await Profile.findOne({
+         user: req.params.user_id
+       }).populate('user', ['name', 'avatar']);
+
+       if(!profile) return res.status(400).json({ msg: 'profile is not found'});
+       res.json(profile);
     } catch (error) {
       console.error(error.message);
+      if(error.kind == 'ObjectId') {
+        return res.status(400).json({ msg: 'Profile not found'});
+      }
       res.status(500).send('Server Error');
 
     }
