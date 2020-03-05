@@ -114,11 +114,11 @@ router.post('/',
 
 });
 
-//@route Get api/profile/me
+//@route Get api/profile/
 //@desc Test route
 //@access Public
 
-router.get('/', async(req, res) =>{
+router.get('/user/:user_id', async(req, res) =>{
     try {
        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
        res.json(profiles);
