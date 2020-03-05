@@ -206,6 +206,8 @@ router.put('/experience',
      if(!errors.isEmpty()){
        return res.status(400).json({ errors: errors.array()});
      }
+
+
      const {
        title,
        company,
@@ -231,7 +233,7 @@ router.put('/experience',
        profile.experience.unshift(newExp);
        await profile.save();
 
-       res.profile.save();
+       res.profile.json();
        
      } catch (error) {
        console.error(error.message);
