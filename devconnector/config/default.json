@@ -1,4 +1,7 @@
 {
     "mongoURL": "mongodb+srv://pubudu3:pubudu3@devconnector-jjwnv.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "mysecrettoken"
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "f3496735b2654c2074c0",
+    "githubSecret": "faa0745cb4d8160aeb191667c084dd096d213d22"
+
 }
