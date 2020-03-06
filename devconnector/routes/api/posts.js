@@ -38,4 +38,19 @@ async (req, res) =>{
         res.status(500).send('Server Error');
     }  
 });
+
+//@route Get api/posts
+//dest  Get all posts
+//access private
+
+router.get('/', auth, async (req, res) =>{
+    try {
+        const posts = await Post.find().sort({ date: -1});
+        res.json(posts);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+        
+    }
+})
 module.exports = router;
