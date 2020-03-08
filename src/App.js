@@ -7,11 +7,11 @@ import Register from './components/auth/Register';
 import './App.css';
 
 //Redux
-import { Provide } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './store';
 
 const App =()=>(
-  <Provide store={store}>
+  <Provider store={store}>
   <Router>
     <Fragment>
      <Navbar/>
@@ -24,7 +24,7 @@ const App =()=>(
       </section>
 </Fragment>
   </Router>
-  </Provide>
+  </Provider>
 
 ) ;
  

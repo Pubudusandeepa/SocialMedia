@@ -1,16 +1,15 @@
-import React,  {Fragment, useState, Link} from 'react';
+import React,  {Fragment, useState} from 'react';
+import {Link} from 'react-router-dom';
 // import axios from 'axios';
 
 
 
-function Login() {
+const Login = () => {
    const [formData, setFormData] = useState({
      
      email: '',
      password: '',
     
-
-
    });
 
    const { email, password } = formData;
@@ -20,8 +19,7 @@ function Login() {
    const onSubmit = async e => {
      e.preventDefault();
     console.log('Success');
-      
-    
+       
    }
     return (
         <Fragment>
@@ -39,8 +37,7 @@ function Login() {
             value={email} 
             onChange = {e => onChange(e)}
             />
-       
-          >
+      
         </div>
         <div className="form-group">
           <input
@@ -56,14 +53,14 @@ function Login() {
         <input type="submit" className="btn btn-primary" value="Login" />
       </form>
       <p className="my-1">
-        Do not have an account? <Link to="/registation">Sign Up</Link>
+        Do not have an account? <Link to="/register">Sign Up</Link>
       </p>
  
         </Fragment>
     )
 }
 
-export default Register
 
 
-export default Login
+
+  export default Login;
