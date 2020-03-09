@@ -1,10 +1,13 @@
 import React,  {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
 // import axios from 'axios';
 
 
 
-const Login = () => {
+const Login = ({ login }) => {
    const [formData, setFormData] = useState({
      
      email: '',
@@ -18,7 +21,7 @@ const Login = () => {
    
    const onSubmit = async e => {
      e.preventDefault();
-    console.log('Success');
+     login(email, password);
        
    }
     return (
@@ -59,8 +62,8 @@ const Login = () => {
         </Fragment>
     )
 }
+  Login.PropTypes = {
+    login: PropTypes.func.isRequired
+  }
 
-
-
-
-  export default Login;
+  export default connect(null, {login})(Login);
