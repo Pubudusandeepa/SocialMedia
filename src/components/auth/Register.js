@@ -94,7 +94,7 @@ const Register = ({ setAlert, register}) => {
 
 Register.propTypes = {
   setAlert : PropTypes.func.isRequired,
-  register : PropTypes.func.isRequired,
+  register : PropTypes.func.isRequired
 }
 
  

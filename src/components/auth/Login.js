@@ -62,7 +62,7 @@ const Login = ({ login }) => {
         </Fragment>
     )
 }
-  Login.PropTypes = {
+  Login.propTypes = {
     login: PropTypes.func.isRequired
   }
 
