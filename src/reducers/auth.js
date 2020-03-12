@@ -7,30 +7,31 @@ const initialState = {
     user: null
 };
 
-export default function(state = initialState, action) {
-    const {type, payload} = action;
-
-    switch(type) {
+const reducer =  (state = initialState, action) => {
+    console.log(action.payload)
+    switch(action.type) {
         case USER_LOADED:
             return {
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                user: payload
+                user: action.payload
             }
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', payload.token);
+            localStorage.setItem('token', action?.payload?.token);
             return {
                 ...state,
-                ...payload,
+                token:action?.payload?.token,
                 isAuthenticated: true,
                 loading: false
             };
             case REGISTER_FAIL:
             case AUTH_ERROR: 
-            case LOGIN_FAIL:   
+            case LOGIN_FAIL: 
+              
                 localStorage.removeItem('token');
+              
                 return {
                     ...state,
                     token: null,
@@ -42,3 +43,5 @@ export default function(state = initialState, action) {
     }
 
 }
+
+export default reducer;

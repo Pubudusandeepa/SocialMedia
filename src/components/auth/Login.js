@@ -9,20 +9,18 @@ import { login } from '../../actions/auth';
 
 const Login = ({ login }) => {
    const [formData, setFormData] = useState({
-     
      email: '',
      password: '',
-    
    });
 
-   const { email, password } = formData;
+   const email = formData.email;
+   const password = formData.password;
 
    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value});
    
    const onSubmit = async e => {
      e.preventDefault();
-     login(email, password);
-       
+     login({email, password});
    }
     return (
         <Fragment>

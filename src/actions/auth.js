@@ -16,7 +16,7 @@ export const register = ({ name, email, password}) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json ',
-            'x-auth-token': localStorage.getItem('token')
+            // 'x-auth-token': localStorage.getItem('token')
            
           
       
@@ -35,11 +35,11 @@ export const register = ({ name, email, password}) => async dispatch => {
         console.log(res);
      
     }catch(error){
-        // const errors = error.response.data.errors;
+        const errors = error.response.data.errors;
       
-        // if(errors){
-        //     errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-        // }
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
 
        dispatch({
            type: REGISTER_FAIL
@@ -72,35 +72,29 @@ export const loadUser = () => async dispatch => {
 
 //Login User
 
-export const login = ({ email, password}) => async dispatch => {
+export const login = (body) => async dispatch => {
+    console.log(body)
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'x-auth-token': localStorage.getItem('token')
-            
-          
+            // 'x-auth-token': localStorage.getItem('token')
         }
     }
-    const body =  JSON.stringify({  email, password});
 
     try{
         const res = await axios.post('/api/auth',body,config);
+        console.log(res)
         dispatch({
             type: LOGIN_SUCCESS,
-            Payload: res.data
+            payload: res?.data
         });
-        console.log("hiiku")
-        dispatch(loadUser());
-       
-
     }
     catch(er){
-        // const errors = er.response.data.errors;
-      
-        // if(errors){
-        //     errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-        // }
-
+        const errors = er?.response?.data?.errors;
+        console.log(123)
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
        dispatch({
            type: LOGIN_FAIL
        });

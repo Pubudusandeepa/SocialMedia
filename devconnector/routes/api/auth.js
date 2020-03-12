@@ -28,11 +28,12 @@ router.get('/', auth, async (req, res) => {
 
 router.post('/',
 [
- 
   check('email', 'Please include a valid email').isEmail(),
-  check('password', 'Password is required').exists()
+  check('password', 'Password is required').not().isEmpty()
 ], 
 async (req, res) => {
+  console.log(req.body)
+
    const errors = validationResult(req);
    if(!errors.isEmpty()){
        return res.status(400).json({errors: errors.array()});
@@ -44,7 +45,7 @@ async (req, res) => {
     try{
         //see if user exists
         let user = await User.findOne({ email });
-
+        console.log(user)
         if(!user){
           return  res.status(400).json({ errors: [{msg: 'Invalid Credentials'}]});
         }
@@ -54,9 +55,6 @@ async (req, res) => {
        if(!isMatch){
            return res.status(400).json({ errors: [{ msg: 'Invalid Credentials'}]});
        }
-       
- 
-        
 
         const payload = {
             user: {
@@ -71,8 +69,6 @@ async (req, res) => {
         }
         
         );
-      //   res.send('User register');
-
     }catch(err){
       console.error(err.message);
       res.status(500).send('Server error');
