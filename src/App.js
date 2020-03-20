@@ -6,6 +6,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Alert from '../src/components/layouts/Alert';
 import setAuthToken from './uitils/setAuthToken';
+import Dashboard from './components/dashboard/Dashboard';
 import './App.css';
 
 //Redux
@@ -32,6 +33,7 @@ const App =()=>{
            <Switch>
              <Route exact path="/login" component={Login}/>
              <Route exact path ="/register" component={Register}/>
+             <Route exact path="/dashboard" component={Dashboard}/>
            </Switch>
       </section>
 </Fragment>
