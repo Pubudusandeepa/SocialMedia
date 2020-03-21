@@ -1,9 +1,10 @@
-import React, { Fragment,useState } from 'react';
+import React, { Fragment,useState, useEffect } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
+import profile from '../../reducers/profile';
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 import PropTypes from 'prop-types'
-import profile from '../../reducers/profile';
+
 
 const EditProfile = ({ profile: {profile, loading}, createProfile,getCurrentProfile,history}) => {
 
@@ -24,6 +25,26 @@ const EditProfile = ({ profile: {profile, loading}, createProfile,getCurrentProf
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
+  useEffect(() =>{
+    getCurrentProfile();
+     
+       setFormData({
+        company: loading || !profile.company ? '' : profile.company,
+        website: loading || !profile.website ? '' : profile.website,
+        location: loading || !profile.location ? '' : profile.location,
+        status: loading || !profile.status ? '' : profile.state,
+        skills: loading || !profile.skills ? '' : profile.skills,
+        bio: loading || !profile.bio ? '' : profile.bio,
+        githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
+        youtube: loading || !profile.youtube ? '' : profile.youtube,
+        twitter: loading || !profile.twitter ? '' : profile.twitter,
+        facebook: loading || !profile.facebook ? '' : profile.facebook,
+        linkedin: loading || !profile.linkedin ? '' : profile.linkedin,
+        instagram: loading || !profile.instagram ? '' : profile.instagram,
+       });
+
+  }, [loading]);
+
   const {
     company,
     website,
@@ -43,7 +64,7 @@ const EditProfile = ({ profile: {profile, loading}, createProfile,getCurrentProf
 
    const onSubmit = e => {
       e.preventDefault();
-      createProfile(formData, history);
+      createProfile(formData, history, true);
    }
     
     return (
@@ -183,7 +204,7 @@ EditProfile.propTypes = {
 
 };
 
-const mapStateToProps = state =({
+const mapStateToProps = state =>({
     profile: state.profile
 })
 

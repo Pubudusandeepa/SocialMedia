@@ -28,7 +28,7 @@ router.get('/me', auth, async  (req, res) =>{
        res.status(500).send('Server Error');
      }
 
-    res.send('Posts route')
+      res.send('Posts route')
 } );
 
 //@route post api/profile/me
@@ -75,7 +75,8 @@ router.post('/',
    if(status) profileFields.status = status;
    if(githubsername) profileFields.githubsername =githubsername;
    if(skills) {
-     profileFields.skills = skills.split(',').map(skill => skill.trim());
+    var str = skills.toString()
+     profileFields.str = str.split(',').map(skill => skill.trim());
    }
    //Build social object
    profileFields.social = {};
