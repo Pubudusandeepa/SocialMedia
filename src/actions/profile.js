@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_PROFILE,PROFILE_ERROR } from './types';
+import { GET_PROFILE,PROFILE_ERROR, GET_PROFILES } from './types';
 
 //get the current users profile
 
@@ -20,6 +20,23 @@ export const getCurrentProfile = () => async dispatch => {
          })
     }
 }
+
+export const getProfiles = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/profile');
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        });
+
+    } catch (error) {
+         dispatch({
+             type: PROFILE_ERROR,
+             payload: { msg: error?.response?.statusText, status: error?.response?.status}
+         })
+    }
+}
+
 
 //create or update profile
 export const createProfile = (FormData, history, edit = false) => async dispatch =>{

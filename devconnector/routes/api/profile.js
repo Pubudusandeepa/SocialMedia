@@ -107,7 +107,7 @@ router.post('/',
        res.json(profile);
     
    }catch(err){
-     console.error(err.message);
+     console.error("error pd"+err.message);
      res.status(500).send('Server Error');
 
    }
