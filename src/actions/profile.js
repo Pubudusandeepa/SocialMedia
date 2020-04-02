@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_PROFILE,PROFILE_ERROR, GET_PROFILES, CLEAR_PROFILE } from './types';
+import { GET_PROFILE,PROFILE_ERROR, GET_PROFILES, CLEAR_PROFILE, GET_REPOS } from './types';
 
 //get the current users profile
 
@@ -46,7 +46,7 @@ export const getProfileById = userId => async dispatch => {
     try {
         const res = await axios.get(`/api/profile/${userId}`);
         dispatch({
-            type: GET_PROFILES,
+            type: GET_PROFILE,
             payload: res.data
         });
 
@@ -57,6 +57,24 @@ export const getProfileById = userId => async dispatch => {
          })
     }
 }
+
+export const getGithubRepos = username => async dispatch => {
+    dispatch({ type: CLEAR_PROFILE });
+    try {
+        const res = await axios.get(`/api/profile/${username}`);
+        dispatch({
+            type: GET_REPOS,
+            payload: res.data
+        });
+
+    } catch (error) {
+         dispatch({
+             type: PROFILE_ERROR,
+             payload: { msg: error?.response?.statusText, status: error?.response?.status}
+         })
+    }
+}
+
 
 //create or update profile
 export const createProfile = (FormData, history, edit = false) => async dispatch =>{

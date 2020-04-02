@@ -7,6 +7,7 @@ import Register from './components/auth/Register';
 import Alert from '../src/components/layouts/Alert';
 import CreateProfile from './components/profile_forms/CreateProfile';
 import EditProfile from './components/profile_forms/EditProfile';
+import Profiles from './components/profiles/profiles';
 import PrivateRoute from './routing/PrivateRoute';
 import setAuthToken from './uitils/setAuthToken';
 import Dashboard from './components/dashboard/Dashboard';
@@ -34,8 +35,10 @@ const App =()=>{
       <section className="container">
         <Alert/>
            <Switch>
-             <Route exact path="/login" component={Login}/>
+             
              <Route exact path ="/register" component={Register}/>
+             <Route exact path="/login" component={Login}/>
+             <Route exact path="/profile" component={Profiles}/>
              <PrivateRoute exact path="/dashboard" component={Dashboard}/>
              <PrivateRoute exact path="/create-profile" component={CreateProfile}/>
              <PrivateRoute exact path="/edit-profile" component={EditProfile}/>
