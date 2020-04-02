@@ -41,6 +41,23 @@ export const getProfiles = () => async dispatch => {
 }
 
 
+export const getProfileById = userId => async dispatch => {
+    
+    try {
+        const res = await axios.get(`/api/profile/${userId}`);
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        });
+
+    } catch (error) {
+         dispatch({
+             type: PROFILE_ERROR,
+             payload: { msg: error?.response?.statusText, status: error?.response?.status}
+         })
+    }
+}
+
 //create or update profile
 export const createProfile = (FormData, history, edit = false) => async dispatch =>{
     try {
